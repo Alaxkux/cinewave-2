@@ -1,0 +1,18 @@
+.page {
+  display: flex; flex-direction: column;
+  min-height: 100%; overflow-x: hidden;
+}
+
+/* Hero: 5px sides only */
+.heroWrap { padding: 5px 5px 0; }
+
+/* All inner content: 5px all sides */
+.inner {
+  display: flex; flex-direction: column; gap: 26px;
+  padding: 12px 5px 5px;
+}
+
+@media (max-width: 768px) {
+  .heroWrap { padding: 5px 5px 0; }
+  .inner { gap: 20px; padding: 10px 5px 5px; }
+}

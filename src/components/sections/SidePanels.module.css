@@ -1,0 +1,224 @@
+.panel {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.panelTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.panelIcon {
+  color: #f59e0b;
+  font-size: 12px;
+}
+
+.panelTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+}
+
+.panelMeta {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.panelSeeAll {
+  font-size: 11px;
+  color: var(--accent);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.panelSeeAll:hover { text-decoration: underline; }
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Trailer Item */
+.trailerItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 6px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.trailerItem.trailerHovered {
+  background: rgba(255,255,255,0.05);
+}
+
+.trailerThumb {
+  position: relative;
+  width: 76px;
+  height: 50px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--bg-card);
+}
+
+.trailerThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.trailerPlayOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition);
+}
+
+.trailerItem.trailerHovered .trailerPlayOverlay {
+  background: rgba(0,0,0,0.5);
+}
+
+.trailerPlayBtn {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0a0a1a;
+  transition: transform var(--transition);
+}
+
+.trailerItem.trailerHovered .trailerPlayBtn {
+  transform: scale(1.1);
+}
+
+.trailerInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.trailerTitle {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.35;
+  margin-bottom: 3px;
+}
+
+.trailerGenre {
+  font-size: 10px;
+  font-weight: 500;
+}
+
+/* Continue Item */
+.continueItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 6px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.continueItem.continueHovered {
+  background: rgba(255,255,255,0.05);
+}
+
+.continueThumb {
+  position: relative;
+  width: 52px;
+  height: 38px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--bg-card);
+}
+
+.continueThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.progressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255,255,255,0.2);
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(to right, #6366f1, #a855f7);
+  border-radius: 2px;
+}
+
+.continueInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.continueTitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+}
+
+.continueEp {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.continuePlay {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--transition);
+}
+
+.continueItem.continueHovered .continuePlay {
+  background: rgba(255,255,255,0.18);
+  color: var(--text-primary);
+  transform: scale(1.08);
+}
+
+.skeletonItem {
+  height: 56px;
+  border-radius: 12px;
+  margin-bottom: 4px;
+}
