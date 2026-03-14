@@ -1,7 +1,7 @@
 // ============================================================
 // 🔑 PASTE YOUR TMDB API KEY HERE
 // ============================================================
-export const TMDB_API_KEY = "YOUR_TMDB_API_KEY_HERE";
+export const TMDB_API_KEY = "f8219d7b30271f44e74993e7463b145b";
 
 export const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 export const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p";
