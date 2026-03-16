@@ -13,7 +13,7 @@ export default function SearchResults({ query, results, loading, onSelect }) {
       </div>
       {loading ? (
         <div className={styles.grid}>
-          {[...Array(6)].map((_, i) => (
+          {[...Array(9)].map((_, i) => (
             <div key={i} className={`${styles.skeletonCard} skeleton`} />
           ))}
         </div>

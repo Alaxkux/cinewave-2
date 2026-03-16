@@ -1,51 +1,59 @@
-.bar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.wrap {
+  position: relative;
+  display: flex; align-items: center; gap: 12px;
   background: rgba(255,255,255,0.04);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 10px 16px;
+  border-radius: 12px; padding: 10px 16px;
 }
 
 .label {
-  font-size: 13px;
-  color: var(--text-muted);
-  font-weight: 500;
-  white-space: nowrap;
+  font-size: 12px; color: var(--text-muted);
+  font-weight: 500; white-space: nowrap;
 }
 
-.selectWrap {
-  position: relative;
-  display: flex;
-  align-items: center;
+.trigger {
+  display: flex; align-items: center; gap: 8px;
+  cursor: pointer; flex: 1;
+}
+
+.icon { font-size: 16px; }
+.current {
+  font-size: 14px; font-weight: 700; color: var(--text-primary);
   flex: 1;
 }
-
-.select {
-  appearance: none;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: var(--text-primary);
-  font-size: 13px;
-  font-weight: 600;
-  font-family: var(--font-body);
-  cursor: pointer;
-  padding-right: 22px;
-  width: 100%;
-}
-
-.select option {
-  background: #13132a;
-  color: var(--text-primary);
-}
-
 .chevron {
-  position: absolute;
-  right: 0;
-  color: var(--text-muted);
-  pointer-events: none;
-  display: flex;
-  align-items: center;
+  font-size: 14px; color: var(--text-muted);
+  transition: transform 0.2s ease;
+  display: inline-block;
 }
+.chevronOpen { transform: rotate(180deg); }
+
+/* Dropdown */
+.dropdown {
+  position: absolute; top: calc(100% + 8px); left: 0; right: 0;
+  background: #13132a; border: 1px solid var(--border-light);
+  border-radius: 14px; padding: 6px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+  z-index: 50;
+  animation: drop 0.18s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes drop {
+  from { opacity:0; transform:translateY(-8px) scale(0.97); }
+  to   { opacity:1; transform:translateY(0) scale(1); }
+}
+
+.option {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%; padding: 10px 12px; border-radius: 10px;
+  background: none; border: none; cursor: pointer;
+  transition: background 0.15s; text-align: left;
+  font-family: var(--font-body);
+}
+.option:hover { background: rgba(255,255,255,0.06); }
+.option.optionActive { background: rgba(99,102,241,0.12); }
+
+.optIcon { font-size: 18px; flex-shrink: 0; }
+.optText { display: flex; flex-direction: column; gap: 1px; flex: 1; }
+.optLabel { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+.optDesc  { font-size: 11px; color: var(--text-muted); }
+.check { font-size: 13px; color: #6366f1; font-weight: 800; }

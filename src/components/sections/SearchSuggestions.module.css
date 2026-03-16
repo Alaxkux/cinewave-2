@@ -1,0 +1,55 @@
+.dropdown {
+  position: absolute;
+  top: calc(100% + 6px); left: 0;
+  width: 320px;
+  background: #13132a;
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+  overflow: hidden;
+  z-index: 200;
+  animation: pop 0.18s ease;
+}
+@keyframes pop { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
+
+.list { list-style: none; padding: 6px; margin: 0; }
+.item {
+  display: flex; gap: 10px; align-items: center;
+  padding: 8px; border-radius: 10px; cursor: pointer;
+  transition: background 0.15s;
+}
+.item:hover { background: rgba(255,255,255,0.06); }
+
+.thumb { width: 38px; height: 54px; border-radius: 7px; overflow: hidden; flex-shrink: 0; }
+.poster { width: 100%; height: 100%; object-fit: cover; display: block; }
+.posterPlaceholder { width: 100%; height: 100%; opacity: 0.7; }
+
+.info { flex: 1; min-width: 0; }
+.title {
+  font-size: 13px; font-weight: 600; color: var(--text-primary);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin-bottom: 5px;
+}
+.meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.genre {
+  font-size: 9px; font-weight: 700; text-transform: uppercase;
+  color: #fff; padding: 2px 6px; border-radius: 4px;
+}
+.year  { font-size: 11px; color: var(--text-muted); }
+.rating { font-size: 11px; color: #fcd34d; }
+
+.viewAll {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 10px; font-size: 12px; color: #6366f1;
+  border-top: 1px solid var(--border); font-weight: 600;
+  cursor: default;
+}
+
+.loadingWrap { padding: 8px; display: flex; flex-direction: column; gap: 8px; }
+.skeletonRow { display: flex; gap: 10px; align-items: center; }
+.skeletonImg { width: 38px; height: 54px; border-radius: 7px; flex-shrink: 0; }
+.skeletonText { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.skeletonLine { height: 12px; border-radius: 6px; width: 80%; }
+.skeletonLineSm { height: 10px; border-radius: 6px; width: 50%; }
+
+.empty { padding: 18px; text-align: center; font-size: 13px; color: var(--text-muted); }

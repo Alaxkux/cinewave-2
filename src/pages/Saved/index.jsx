@@ -3,7 +3,8 @@ import { useApp } from "../../context/AppContext";
 import { getPosterUrl } from "../../services/tmdb";
 import { getGenreInfo, getPlaceholderGradient } from "../../utils/genres";
 import { PlayIcon, HeartIcon } from "../../components/ui/Icons";
-import MovieModal from "../../components/ui/MovieModal";
+import EmptyState from "../../components/ui/EmptyState";
+import { toast } from "../../components/ui/Toast";
 import styles from "./Saved.module.css";
 
 const PER_PAGE = 12;
@@ -12,7 +13,7 @@ function SavedCard({ movie, onSelect }) {
   const { toggleFavorite } = useApp();
   const [hovered, setHovered] = useState(false);
   const imgUrl = getPosterUrl(movie.poster_path, "md");
-  const genre = getGenreInfo(movie.genre_ids || []);
+  const genre  = getGenreInfo(movie.genre_ids || []);
 
   return (
     <div
@@ -24,10 +25,14 @@ function SavedCard({ movie, onSelect }) {
     >
       {imgUrl && <img src={imgUrl} alt={movie.title} className={styles.cardImg} loading="lazy" />}
       <div className={styles.cardOverlay} />
-      <div className={styles.badge} style={{ background: genre.color }}>ADDED</div>
+      <div className={styles.badge} style={{ background: genre.color }}>SAVED</div>
       <button
         className={styles.removeBtn}
-        onClick={(e) => { e.stopPropagation(); toggleFavorite(movie); }}
+        onClick={(e) => {
+          e.stopPropagation();
+          toggleFavorite(movie);
+          toast.info(`Removed "${movie.title || movie.name}"`);
+        }}
         aria-label="Remove"
       >
         <HeartIcon size={12} filled />
@@ -46,12 +51,12 @@ function SavedCard({ movie, onSelect }) {
 }
 
 export default function SavedPage() {
-  const { favorites } = useApp();
+  const { favorites, setActivePage, openMovieDetail } = useApp();
   const [page, setPage] = useState(1);
-  const [selected, setSelected] = useState(null);
+  
 
   const totalPages = Math.max(1, Math.ceil(favorites.length / PER_PAGE));
-  const paginated = favorites.slice((page - 1) * PER_PAGE, page * PER_PAGE);
+  const paginated  = favorites.slice((page - 1) * PER_PAGE, page * PER_PAGE);
 
   return (
     <div className={styles.page}>
@@ -61,21 +66,20 @@ export default function SavedPage() {
       </div>
 
       {favorites.length === 0 ? (
-        <div className={styles.empty}>
-          <span className={styles.emptyIcon}>🎬</span>
-          <p className={styles.emptyText}>No saved items yet</p>
-          <p className={styles.emptyHint}>Click the ❤️ icon on any movie to save it here</p>
-        </div>
+        <EmptyState
+          type="saved"
+          action="Browse Movies"
+          onAction={() => setActivePage("home")}
+        />
       ) : (
         <>
           <div className={styles.grid}>
-            {paginated.map(m => <SavedCard key={m.id} movie={m} onSelect={setSelected} />)}
+            {paginated.map(m => <SavedCard key={m.id} movie={m} onSelect={openMovieDetail} />)}
           </div>
-
           {totalPages > 1 && (
             <div className={styles.pagination}>
               <div className={styles.pageNumbers}>
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
+                {Array.from({ length: totalPages }, (_, i) => i+1).map(p => (
                   <button
                     key={p}
                     className={`${styles.pageBtn} ${p === page ? styles.pageBtnActive : ""}`}
@@ -83,18 +87,17 @@ export default function SavedPage() {
                   >{p}</button>
                 ))}
                 {page < totalPages && (
-                  <button className={styles.pageBtn} onClick={() => setPage(p => p + 1)}>›</button>
+                  <button className={styles.pageBtn} onClick={() => setPage(p => p+1)}>›</button>
                 )}
               </div>
               {page < totalPages && (
-                <button className={styles.nextBtn} onClick={() => setPage(p => p + 1)}>Next</button>
+                <button className={styles.nextBtn} onClick={() => setPage(p => p+1)}>Next</button>
               )}
             </div>
           )}
         </>
       )}
 
-      {selected && <MovieModal movie={selected} onClose={() => setSelected(null)} />}
     </div>
   );
 }

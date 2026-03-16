@@ -1,18 +1,22 @@
 .page {
   display: flex; flex-direction: column;
   min-height: 100%; overflow-x: hidden;
+  width: 100%; box-sizing: border-box;
 }
 
-/* Hero: 5px sides only */
 .heroWrap { padding: 5px 5px 0; }
 
-/* All inner content: 5px all sides */
 .inner {
-  display: flex; flex-direction: column; gap: 26px;
-  padding: 12px 5px 5px;
+  display: flex; flex-direction: column; gap: 22px;
+  padding: 12px 5px 24px;
+  width: 100%; box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 @media (max-width: 768px) {
-  .heroWrap { padding: 5px 5px 0; }
-  .inner { gap: 20px; padding: 10px 5px 5px; }
+  .heroWrap { padding: 4px 4px 0; }
+  .inner { gap: 16px; padding: 10px 4px 90px; }
+}
+@media (max-width: 480px) {
+  .inner { gap: 14px; padding: 8px 4px 90px; }
 }

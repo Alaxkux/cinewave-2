@@ -1,10 +1,11 @@
 import { useApp } from "../../context/AppContext";
-import { HomeIcon, HeartIcon, DownloadIcon, PersonIcon, SettingsIcon } from "../ui/Icons";
+import { HomeIcon, HeartIcon, DownloadIcon, PersonIcon, SettingsIcon, SearchIcon } from "../ui/Icons";
 import styles from "./Sidebar.module.css";
 
 const ITEMS = [
   { id: "home",      icon: HomeIcon,     label: "Home" },
-  { id: "favorites", icon: HeartIcon,    label: "Saved Items" },
+  { id: "browse",    icon: SearchIcon,   label: "Browse" },
+  { id: "favorites", icon: HeartIcon,    label: "Saved" },
   { id: "downloads", icon: DownloadIcon, label: "Downloads" },
   { id: "profile",   icon: PersonIcon,   label: "Profile" },
   { id: "settings",  icon: SettingsIcon, label: "Settings" },
@@ -12,11 +13,9 @@ const ITEMS = [
 
 export default function Sidebar() {
   const { activePage, setActivePage, user } = useApp();
-
   return (
     <aside className={styles.sidebar}>
-      <div className={styles.logo}>🎬</div>
-
+      <div className={styles.logo} onClick={() => setActivePage("home")}>🎬</div>
       <nav className={styles.nav}>
         {ITEMS.map(({ id, icon: Icon, label }) => (
           <button
@@ -30,13 +29,7 @@ export default function Sidebar() {
           </button>
         ))}
       </nav>
-
-      {/* Bottom avatar */}
-      <div
-        className={styles.bottomAvatar}
-        onClick={() => setActivePage("profile")}
-        title="Profile"
-      >
+      <div className={styles.bottomAvatar} onClick={() => setActivePage("profile")} title="Profile">
         {user.avatar
           ? <img src={user.avatar} alt="avatar" />
           : <span>{user.name?.[0]?.toUpperCase() || "A"}</span>

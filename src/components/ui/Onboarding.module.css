@@ -1,0 +1,118 @@
+.overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(16px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+  animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal {
+  background: #0f0f24;
+  border: 1px solid var(--border-light);
+  border-radius: 24px;
+  padding: 32px 28px;
+  width: 100%; max-width: 480px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.7);
+  animation: slideUp 0.35s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.progress { display: flex; gap: 6px; margin-bottom: 28px; }
+.progressDot { flex: 1; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.1); transition: background 0.3s; }
+.progressActive { background: linear-gradient(to right, #6366f1, #a855f7); }
+
+.step { display: flex; flex-direction: column; gap: 16px; }
+
+.logoWrap { font-size: 48px; text-align: center; }
+.doneIcon { font-size: 52px; text-align: center; animation: bounce 0.6s ease; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 40%{transform:translateY(-14px)} 70%{transform:translateY(-6px)} }
+
+.heading {
+  font-family: var(--font-display);
+  font-size: 22px; font-weight: 800; color: #fff;
+  text-align: center; line-height: 1.25;
+}
+.sub { font-size: 13px; color: var(--text-muted); text-align: center; line-height: 1.5; }
+
+.nameWrap { display: flex; flex-direction: column; gap: 8px; margin: 4px 0; }
+.label { font-size: 13px; font-weight: 600; color: var(--text-secondary); }
+.input {
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+  border-radius: 12px; color: #fff; font-size: 14px;
+  font-family: var(--font-body); outline: none; padding: 12px 16px;
+  transition: border-color 0.2s;
+}
+.input:focus { border-color: rgba(99,102,241,0.6); }
+
+/* Genre grid */
+.genreGrid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
+  max-height: 280px; overflow-y: auto; scrollbar-width: none;
+}
+.genreGrid::-webkit-scrollbar { display: none; }
+
+.genreChip {
+  position: relative;
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px; border-radius: 12px;
+  border: 1.5px solid var(--border);
+  background: var(--bg-card); cursor: pointer;
+  transition: all 0.2s; font-family: var(--font-body);
+}
+.genreChip:hover { border-color: var(--border-light); background: var(--bg-card-hover); }
+.genreChip.genreSelected { }
+.genreEmoji { font-size: 18px; }
+.genreLabel { font-size: 13px; font-weight: 600; color: var(--text-primary); flex: 1; text-align: left; }
+.check {
+  position: absolute; top: 6px; right: 8px;
+  font-size: 11px; font-weight: 800; color: #fff;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: linear-gradient(135deg,#6366f1,#a855f7);
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Selected tags */
+.selectedGenres { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.selectedTag {
+  font-size: 12px; font-weight: 600;
+  border: 1px solid; border-radius: 20px;
+  padding: 4px 12px;
+}
+
+/* Buttons */
+.btnRow { display: flex; gap: 10px; }
+.nextBtn {
+  flex: 1; padding: 13px; border-radius: 12px;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  border: none; color: #fff; font-size: 14px; font-weight: 700;
+  cursor: pointer; font-family: var(--font-body); transition: opacity 0.2s;
+}
+.nextBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+.nextBtn:not(:disabled):hover { opacity: 0.9; }
+.backBtn {
+  padding: 13px 18px; border-radius: 12px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 13px; font-weight: 600;
+  cursor: pointer; font-family: var(--font-body); transition: all 0.2s;
+}
+.backBtn:hover { color: var(--text-primary); background: var(--bg-card-hover); }
+.doneBtn {
+  width: 100%; padding: 14px; border-radius: 12px;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  border: none; color: #fff; font-size: 14px; font-weight: 700;
+  cursor: pointer; font-family: var(--font-body);
+  box-shadow: 0 6px 20px rgba(99,102,241,0.4);
+  transition: all 0.2s;
+}
+.doneBtn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(99,102,241,0.5); }
+
+@media (max-width: 480px) {
+  .modal { padding: 24px 16px; }
+  .heading { font-size: 18px; }
+  .genreGrid { grid-template-columns: repeat(2, 1fr); }
+}

@@ -86,3 +86,7 @@
   .input { width: 130px; }
   .row { padding: 12px 14px; }
 }
+
+@media (max-width: 768px) {
+  .page { overflow-x: hidden; padding-bottom: 80px; }
+}

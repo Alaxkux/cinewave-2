@@ -3,15 +3,11 @@ import { tmdbService, TMDB_API_KEY } from "../services/tmdb";
 
 export function useTMDB() {
   const [data, setData] = useState({
-    trending: [],
-    popular: [],
-    trailers: [],
-    tvShows: [],
-    animation: [],
-    mystery: [],
+    trending: [], popular: [], tvShows: [],
+    animation: [], mystery: [], newReleases: [],
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error,   setError]   = useState(null);
   const hasKey = TMDB_API_KEY !== "YOUR_TMDB_API_KEY_HERE";
 
   useEffect(() => {
@@ -20,22 +16,22 @@ export function useTMDB() {
     Promise.all([
       tmdbService.getTrending(),
       tmdbService.getPopular(),
-      tmdbService.getUpcoming(),
       tmdbService.getTVPopular(),
       tmdbService.getAnimationMovies(),
       tmdbService.getMysteryMovies(),
+      tmdbService.getNewReleases(),
     ])
-      .then(([trending, popular, upcoming, tv, animation, mystery]) => {
+      .then(([trending, popular, tv, animation, mystery, newReleases]) => {
         setData({
-          trending: trending.results || [],
-          popular: (popular.results || []).slice(0, 10),
-          trailers: (upcoming.results || []).slice(0, 4),
-          tvShows: (tv.results || []).slice(0, 10),
-          animation: (animation.results || []).slice(0, 10),
-          mystery: (mystery.results || []).slice(0, 10),
+          trending:    trending.results    || [],
+          popular:     popular.results     || [],
+          tvShows:     tv.results          || [],
+          animation:   animation.results   || [],
+          mystery:     mystery.results     || [],
+          newReleases: newReleases.results || [],
         });
       })
-      .catch((err) => setError(err.message))
+      .catch(e => setError(e.message))
       .finally(() => setLoading(false));
   }, [hasKey]);
 
@@ -44,17 +40,15 @@ export function useTMDB() {
     try {
       const res = await tmdbService.searchMovies(query);
       return res.results || [];
-    } catch {
-      return [];
-    }
+    } catch { return []; }
   }, [hasKey]);
 
   return { data, loading, error, hasKey, search };
 }
 
 export function useMovieDetails(id) {
-  const [movie, setMovie] = useState(null);
-  const [videos, setVideos] = useState([]);
+  const [movie,   setMovie]   = useState(null);
+  const [videos,  setVideos]  = useState([]);
   const [loading, setLoading] = useState(false);
   const hasKey = TMDB_API_KEY !== "YOUR_TMDB_API_KEY_HERE";
 
@@ -67,7 +61,7 @@ export function useMovieDetails(id) {
     ])
       .then(([details, vids]) => {
         setMovie(details);
-        setVideos((vids.results || []).filter((v) => v.site === "YouTube"));
+        setVideos((vids.results || []).filter(v => v.site === "YouTube"));
       })
       .catch(console.error)
       .finally(() => setLoading(false));
